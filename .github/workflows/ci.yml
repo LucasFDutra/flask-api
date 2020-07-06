@@ -35,7 +35,6 @@ jobs:
         pytest --cov=./src --cov-report=xml
     - uses: codecov/codecov-action@v1
         with:
-        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        file: ./coverage.xml # optional
-        name: codecov-umbrella # optional
-        fail_ci_if_error: true # optional (default = false)
+            file: ./coverage.xml # optional
+            name: codecov-umbrella # optional
+            fail_ci_if_error: true # optional (default = false)
