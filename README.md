@@ -63,8 +63,8 @@ $ poetry add nome_do_pacote
 Primeiramente instale a lib do pytest com o comando
 
 ```shell
-$ poetry add pytest
-$ poetry add pytest-cov
+$ poetry add --dev pytest
+$ poetry add --dev pytest-cov
 ```
 
 Agora crie arquivos com os nomes test_modulo.py ou modulo_test.py
@@ -93,3 +93,17 @@ e adicione essas configurações ao seu vscode
 ```
 
 Agora o lint vai modificar seu arquivo assim que salvar
+
+
+# gerar requiremenst.txt
+dependencias de prod
+
+```shell
+poetry export -f requirements.txt > requirements.txt
+```
+
+dependencias de prod + dev
+
+```shell
+poetry export --dev -f requirements.txt > requirements.txt
+```
