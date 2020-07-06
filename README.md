@@ -57,3 +57,39 @@ $ poetry shell
 ```shell
 $ poetry add nome_do_pacote
 ```
+
+# Fazendo testes
+
+Primeiramente instale a lib do pytest com o comando
+
+```shell
+$ poetry add pytest
+$ poetry add pytest-cov
+```
+
+Agora crie arquivos com os nomes test_modulo.py ou modulo_test.py
+
+para rodar os testes, rode com o comando
+
+```shell
+$ pytest --cov=./src --cov-report=xml
+```
+
+# Lint
+fora da sua virtual env, rode os comandos:
+
+```shell
+$ pip3 install pylint
+$ pip3 install flake8
+$ pip3 install autopep8
+```
+e adicione essas configurações ao seu vscode
+
+```json
+"python.linting.flake8Enabled": true,
+"[python]": {
+"editor.formatOnSave": true
+}
+```
+
+Agora o lint vai modificar seu arquivo assim que salvar
