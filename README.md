@@ -158,3 +158,35 @@ jobs:
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
 ```
+
+
+# docker
+
+## instalar o gunicorn
+
+```shell
+$ poetry add gunicorn
+```
+
+gere o arquivo requirements.txt
+
+```shell
+$ poetry export -f requirements.txt > requirements.txt
+```
+
+crie os arquivos `Dockerfile`, `docker-compose.yml` e `.dockerignore`
+
+Pege eles aqui no repositório
+
+rode o comando
+```shell
+$ docker-compose up -d
+```
+
+ou crie o arquivo `init_docker.sh` e rode o comando
+
+```shell
+$ source init_docker.sh
+```
+
+isso vai fazer rodar o docker como ambiente de produção
