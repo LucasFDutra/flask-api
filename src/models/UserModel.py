@@ -6,7 +6,6 @@ class UserModel():
         self.connection = db.create_db_connection()
 
     def create_table(self):
-        print('aqui')
         cursor = self.connection.cursor()
         cursor.execute(
             "CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
