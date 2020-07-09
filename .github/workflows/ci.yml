@@ -22,7 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         poetry export --dev -f requirements.txt > requirements.txt
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install --require-hashes -r requirements.txt; fi
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -31,7 +31,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest --cov=./src --cov-report=xml
+        pytest --cov=./flask-api/src --cov-report=xml
     - uses: codecov/codecov-action@v1
       with:
         file: ./coverage.xml # optional

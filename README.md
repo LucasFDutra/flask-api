@@ -190,3 +190,26 @@ $ source init_docker.sh
 ```
 
 isso vai fazer rodar o docker como ambiente de produção
+
+# conexão com postgres.
+vamos utilizar o psycopg para isso, então rode
+
+```shell
+$ poetry add psycopg2
+```
+
+se der um erro, veja se não é por falta da lib `libpq-fe.h`. se for rode o comando
+
+```shell
+$ sudo apt-get install libpq-dev
+```
+
+e mande instalar o psycopg2 novamente
+
+vamos utilizar variáveis ambiente para poder gerenciar o nosso banco de dados, logo precisaremos da lib dotenv, que no python se chama `python-dotenv`. Criar o arquivo .env e chamar ele na conexão
+
+rode
+
+```shell
+$ poetry add python-dotenv
+```
