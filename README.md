@@ -1,5 +1,5 @@
 <a href="https://codecov.io/gh/LucasFDutra/flask-api">
-  <img src="https://codecov.io/gh/LucasFDutra/flask-api/branch/dev/graph/badge.svg" />
+  <img src="https://codecov.io/gh/LucasFDutra/flask-api/branch/master/graph/badge.svg" />
 </a>
 
 
