@@ -1,4 +1,4 @@
-import database.connection as db
+import src.database.connection as db
 
 
 class UserModel():

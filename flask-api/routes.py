@@ -1,4 +1,4 @@
-from controllers.UserController import UserController
+from src.controllers.UserController import UserController
 
 
 class Routes():
