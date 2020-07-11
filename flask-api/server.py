@@ -26,6 +26,7 @@ class StartServer(BaseApplication):
 
 if __name__ == '__main__':
     if('--prod' in sys.argv):
+        os.environ['PROJECT_ENVIRONMENT'] = 'PROD'
         options = {
             'bind': '%s:%s' % ('0.0.0.0', '5000'),
             'workers': (multiprocessing.cpu_count() * 2) + 1,
@@ -33,5 +34,6 @@ if __name__ == '__main__':
         }
         StartServer(app, options).run()
     else:
+        os.environ['PROJECT_ENVIRONMENT'] = 'DEV'
         os.environ['FLASK_ENV'] = "development"
         app.run()
