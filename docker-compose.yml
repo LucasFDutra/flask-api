@@ -4,6 +4,7 @@ services:
     app:
         build: .
         command: python flask-api/server.py --prod
+        restart: always
         ports:
             - "5000:5000"
         volumes:
