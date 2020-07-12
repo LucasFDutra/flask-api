@@ -213,3 +213,10 @@ rode
 ```shell
 $ poetry add python-dotenv
 ```
+
+
+# docker de testes
+
+```shell
+$ docker run -p 5434:5432  --name postgres-test -e POSTGRES_PASSWORD=1234 -d postgres
+```

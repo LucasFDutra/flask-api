@@ -1,0 +1,4 @@
+{
+    "mugrations_path": "flask-api/src/database/mugrations/",
+    "connection_path": "flask-api/src/database/connection.py"
+}
