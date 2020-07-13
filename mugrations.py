@@ -86,13 +86,13 @@ def end_mugration(cursor):
 
 def create_mugration(file_name, root_path):
     mugration_file_name = 'mugration_'+str(time()).replace(
-        '.', '_')+'_'+file_name.replace('--name=', '')
+        '.', '_')+'_'+file_name
     mugration_file_name_ex = root_path+mugration_file_name+'.py'
     os.system('touch '+mugration_file_name_ex)
 
 
 def delete_mugration(cursor, file_name, root_path):
-    mugration_file_name = file_name.replace('--name=', '')
+    mugration_file_name = file_name
     mugration_file_name_ex = mugration_file_name+'.py'
 
     cursor.execute("""

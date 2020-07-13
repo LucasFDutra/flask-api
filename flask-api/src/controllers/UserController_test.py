@@ -1,7 +1,9 @@
 from src.controllers.UserController import UserController
 
 
-def test_soma():
+def test_generate_token():
     user_controller = UserController()
-    assert user_controller.soma(1, 2) == 3
-    assert user_controller.soma('aba', 'caxi') == 'abacaxi'
+    print('aqui')
+    token = user_controller.generate_token(12)
+    print(token)
+    assert status == 200
