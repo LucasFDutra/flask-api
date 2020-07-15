@@ -1,10 +1,8 @@
 import psycopg2
-from dotenv import load_dotenv
 import os
 
 
 def create_db_connection():
-    load_dotenv()
     environment = os.environ['PROJECT_ENVIRONMENT']
     if (environment == 'PROD'):
         connection_params = {

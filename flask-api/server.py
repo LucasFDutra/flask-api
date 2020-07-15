@@ -4,8 +4,11 @@ import multiprocessing
 import sys
 import os
 
-application = App()
-app = application.get_app()
+
+def get_app():
+    application = App()
+    app = application.get_app()
+    return app
 
 
 class StartServer(BaseApplication):
@@ -27,6 +30,7 @@ class StartServer(BaseApplication):
 if __name__ == '__main__':
     if('--prod' in sys.argv):
         os.environ['PROJECT_ENVIRONMENT'] = 'PROD'
+        app = get_app()
         options = {
             'bind': '%s:%s' % ('0.0.0.0', '5000'),
             'workers': (multiprocessing.cpu_count() * 2) + 1,
@@ -35,5 +39,6 @@ if __name__ == '__main__':
         StartServer(app, options).run()
     else:
         os.environ['PROJECT_ENVIRONMENT'] = 'DEV'
+        app = get_app()
         os.environ['FLASK_ENV'] = "development"
         app.run()

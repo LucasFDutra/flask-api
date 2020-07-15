@@ -4,6 +4,7 @@ import json
 import importlib
 import mugrations
 import time
+from dotenv import load_dotenv
 
 
 def get_env():
@@ -114,6 +115,7 @@ def mugrations_help():
 
 
 def test():
+    load_dotenv()
     sys.argv.append('--test')
     os.system("docker start postgres-test")
     time.sleep(3)
