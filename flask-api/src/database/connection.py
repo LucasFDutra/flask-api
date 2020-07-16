@@ -32,5 +32,4 @@ def create_db_connection():
         }
 
     connection = psycopg2.connect(**connection_params)
-
     return connection

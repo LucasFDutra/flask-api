@@ -34,6 +34,7 @@ mugrations_down_all = "scripts:mugrations_down_all"
 mugrations_create_mugration = "scripts:mugrations_create_mugration"
 mugrations_delete_mugration = "scripts:mugrations_delete_mugration"
 mugrations_help = "scripts:mugrations_help"
+dev = "scripts:run_dev"
 
 [build-system]
 requires = ["poetry>=0.12"]

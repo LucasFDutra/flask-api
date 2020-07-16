@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 
 def get_env():
+    load_dotenv()
     if ('--prod' in sys.argv):
         os.environ['PROJECT_ENVIRONMENT'] = 'PROD'
     elif ('--test' in sys.argv):
@@ -115,7 +116,6 @@ def mugrations_help():
 
 
 def test():
-    load_dotenv()
     sys.argv.append('--test')
     os.system("docker start postgres-test")
     time.sleep(3)
@@ -126,3 +126,7 @@ def test():
     mugrations_down_all()
     mugrations_end()
     os.system("docker stop postgres-test")
+
+
+def run_dev():
+    os.system('python3 flask-api/server.py')

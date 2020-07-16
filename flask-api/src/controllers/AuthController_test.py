@@ -47,3 +47,13 @@ def test_validate_email_error():
         response = auth_controller.validate_email(email)
         print(response, email)
         assert response == False
+
+
+def test_sign_user():
+    email = fake.ascii_email()
+    res = auth_controller.sign_user(email, '1234')
+    print(res)
+    secretKey = os.environ['FLASK_API_SECRETKEY']
+    id_user_from_token = jwt.decode(token, secretKey, algorithms=[
+        'HS256'])['data']['id_user']
+    assert status == 200
