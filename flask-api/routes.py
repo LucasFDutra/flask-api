@@ -12,3 +12,7 @@ class Routes():
         @app.route('/api/auth/sign')
         def sign_user_route():
             return self.auth_controller.sign_user(request)
+
+        @app.route('/api/auth/login')
+        def login_user_route():
+            return self.auth_controller.login_user(request)

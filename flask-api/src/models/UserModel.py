@@ -14,9 +14,7 @@ class UserModel():
 
         cursor.close()
 
-        if (len(select_response) > 0):
-            return False
-        return True
+        return select_response
 
     def create_user(self, id_user: str, email: str, password: str) -> bool:
         try:

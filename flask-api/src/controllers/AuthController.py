@@ -5,6 +5,8 @@ import datetime
 import re
 from src.models.UserModel import UserModel
 import uuid
+from hashlib import blake2b
+from hmac import compare_digest
 
 
 class AuthController():
@@ -24,21 +26,30 @@ class AuthController():
         else:
             return (result[0] == email)
 
+    def encrypt_password(self, password):
+        SECRETE_KEY_PASSWORD = b'34020230$%$%$108'
+        AUTH_SIZE = 16
+        h = blake2b(digest_size=AUTH_SIZE, key=SECRETE_KEY_PASSWORD)
+        h.update(password.encode())
+        string_password = h.hexdigest().encode('utf-8')
+        return string_password.decode('utf-8')
+
+    def compare_password(self, password, real_password):
+        return self.encrypt_password(password) == real_password
+
     def sign_user(self, data):
-        # print(data.headers)
         email = data.headers['EMAIL']
         password = data.headers['PASSWORD']
+        password = self.encrypt_password(password)
+        print(password)
 
-        # verificar se o email é válido, se não for então retornar que o email é inválido
         if not (self.validate_email(email)):
             return "this email is not a valid email", 400
 
-        # verificar se usuário existe no banco, caso sim, retorna mensagem dizendo que ele já existe
         user_model = UserModel()
-        if not (user_model.select_user(email)):
+        if (len(user_model.select_user(email)) > 0):
             return "this email already exists", 400
 
-        # se ele não existir, então adicione o mesmo no banco
         id_user = uuid.uuid4().hex
 
         create_user_response = user_model.create_user(id_user, email, password)
@@ -46,8 +57,23 @@ class AuthController():
         if not (create_user_response):
             return "Error in create user, try again", 400
 
-        # se tudo deu certo até aqui, então gere o token
         token = self.generate_token(id_user)
 
-        # retorne o token
         return jsonify({'token': token.decode('UTF-8')}), 200
+
+    def login_user(self, data):
+        email = data.headers['EMAIL']
+        password = data.headers['PASSWORD']
+
+        if not (self.validate_email(email)):
+            return "this email is not a valid email", 400
+
+        user_model = UserModel()
+        user_model_response = user_model.select_user(email)
+        user_model_response_password = user_model_response[0][2]
+        user_model_response_id_user = user_model_response[0][1]
+
+        if not (self.compare_password(password, user_model_response_password)):
+            return "password incorrect", 400
+        token = self.generate_token(user_model_response_id_user)
+        return jsonify({'token': token.decode('utf-8')}), 200

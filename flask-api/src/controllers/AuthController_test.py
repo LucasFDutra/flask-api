@@ -3,6 +3,8 @@ import os
 import jwt
 from faker import Faker
 from faker.providers import internet
+import random
+import string
 
 auth_controller = AuthController()
 fake = Faker()
@@ -49,11 +51,33 @@ def test_validate_email_error():
         assert response == False
 
 
-def test_sign_user():
-    email = fake.ascii_email()
-    res = auth_controller.sign_user(email, '1234')
-    print(res)
-    secretKey = os.environ['FLASK_API_SECRETKEY']
-    id_user_from_token = jwt.decode(token, secretKey, algorithms=[
-        'HS256'])['data']['id_user']
-    assert status == 200
+def test_encrypt_password():
+    letters = string.ascii_letters+string.digits+string.printable+string.punctuation
+    password = ''.join([random.choice(letters) for i in range(16)])
+    encrypted_password = auth_controller.encrypt_password(password)
+    assert len(encrypted_password) > 0
+
+
+def test_compare_password_correct():
+    letters = string.ascii_letters+string.digits+string.printable+string.punctuation
+    password = ''.join([random.choice(letters) for i in range(16)])
+    encrypted_password = auth_controller.encrypt_password(password)
+    assert auth_controller.compare_password(password, encrypted_password)
+
+
+def test_compare_password_error():
+    letters = string.ascii_letters+string.digits+string.printable+string.punctuation
+    password_1 = ''.join([random.choice(letters) for i in range(16)])
+    password_2 = ''.join([random.choice(letters) for i in range(16)])
+    encrypted_password = auth_controller.encrypt_password(password_1)
+    assert not auth_controller.compare_password(password_2, encrypted_password)
+
+
+# def test_sign_user():
+#     email = fake.ascii_email()
+#     res = auth_controller.sign_user(email, '1234')
+#     print(res)
+#     secretKey = os.environ['FLASK_API_SECRETKEY']
+#     id_user_from_token = jwt.decode(token, secretKey, algorithms=[
+#         'HS256'])['data']['id_user']
+#     assert status == 200
