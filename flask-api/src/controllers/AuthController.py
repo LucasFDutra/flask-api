@@ -12,9 +12,10 @@ from hmac import compare_digest
 class AuthController():
     def generate_token(self, id_user: int) -> bytes:
         secretKey = os.environ['FLASK_API_SECRETKEY']
+        token_duration = int(os.environ['FLASK_API_TOKEN_DURATION'])
         token = jwt.encode({
             'data': {'id_user': id_user},
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=token_duration)
         }, secretKey, algorithm="HS256")
         return token
 
@@ -27,7 +28,8 @@ class AuthController():
             return (result[0] == email)
 
     def encrypt_password(self, password):
-        SECRETE_KEY_PASSWORD = b'34020230$%$%$108'
+        SECRETE_KEY_PASSWORD = os.environ['FLASK_API_SECRETE_KEY_PASSWORD'].encode(
+            'ascii')
         AUTH_SIZE = 16
         h = blake2b(digest_size=AUTH_SIZE, key=SECRETE_KEY_PASSWORD)
         h.update(password.encode())

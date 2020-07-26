@@ -8,3 +8,6 @@ import os
 class UserController():
     def __init__(self):
         self.user_model = UserModel()
+
+    def hello(self, data):
+        return jsonify({'ok': 'aqui'})

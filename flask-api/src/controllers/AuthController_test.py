@@ -52,21 +52,24 @@ def test_validate_email_error():
 
 
 def test_encrypt_password():
-    letters = string.ascii_letters+string.digits+string.printable+string.punctuation
+    letters = string.ascii_letters + string.digits + \
+        string.printable + string.punctuation
     password = ''.join([random.choice(letters) for i in range(16)])
     encrypted_password = auth_controller.encrypt_password(password)
     assert len(encrypted_password) > 0
 
 
 def test_compare_password_correct():
-    letters = string.ascii_letters+string.digits+string.printable+string.punctuation
+    letters = string.ascii_letters + string.digits + \
+        string.printable + string.punctuation
     password = ''.join([random.choice(letters) for i in range(16)])
     encrypted_password = auth_controller.encrypt_password(password)
     assert auth_controller.compare_password(password, encrypted_password)
 
 
 def test_compare_password_error():
-    letters = string.ascii_letters+string.digits+string.printable+string.punctuation
+    letters = string.ascii_letters + string.digits + \
+        string.printable + string.punctuation
     password_1 = ''.join([random.choice(letters) for i in range(16)])
     password_2 = ''.join([random.choice(letters) for i in range(16)])
     encrypted_password = auth_controller.encrypt_password(password_1)
